@@ -5,7 +5,8 @@ import {
   OpenALPROptions,
   OpenALPRResult
 } from "@ionic-native/openalpr/ngx";
-import { Platform } from "@ionic/angular";
+import { Platform, ModalController } from "@ionic/angular";
+import { ResultModal } from "../result/result.page";
 
 @Component({
   selector: "app-home",
@@ -30,7 +31,8 @@ export class HomePage {
   constructor(
     protected camera: Camera,
     protected openalpr: OpenALPR,
-    protected platform: Platform
+    protected platform: Platform,
+    protected modalController: ModalController
   ) {
     //Set default camera options.
     this.cameraOptions = {
@@ -59,13 +61,17 @@ export class HomePage {
         ? this.camera.PictureSourceType.CAMERA
         : this.camera.PictureSourceType.PHOTOLIBRARY;
 
-    this.camera.getPicture(this.cameraOptions).then(imageData => {
-      this.openalpr
-        .scan(imageData, this.openAlprOptions)
-        .then((result: OpenALPRResult) => {
-          console.log(result);
-        });
-    });
+    this.camera
+      .getPicture(this.cameraOptions)
+      .then(imageData => {
+        this.openalpr
+          .scan(imageData, this.openAlprOptions)
+          .then((result: [OpenALPRResult]) => {
+            this.showResult(result);
+          })
+          .catch(error => console.error(error));
+      })
+      .catch(error => console.error(error));
 
     if (this.platform.is("ios")) {
       this.camera.cleanup();
@@ -106,5 +112,19 @@ export class HomePage {
     }
 
     return countries;
+  }
+
+  /**
+   * Show the result using a modal.
+   *
+   * @param result
+   */
+  async showResult(result: OpenALPRResult[]) {
+    const modal = await this.modalController.create({
+      component: ResultModal,
+      componentProps: { result: result, country: this.getCountry() }
+    });
+
+    await modal.present();
   }
 }

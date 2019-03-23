@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content padding>
+  <!-- Button for using the camera to get an image. -->
   <ion-button
     expand="full"
     fill="solid"
@@ -16,6 +17,8 @@
     <ion-icon name="qr-scanner"></ion-icon>
     &nbsp; Take picture
   </ion-button>
+
+  <!-- Button for using the photolibrary to get an image. -->
   <ion-button expand="full" fill="solid" color="dark" (click)="scan('library')">
     <ion-icon name="images"></ion-icon>
     &nbsp; Select picture
@@ -27,6 +30,8 @@
     <ion-list>
       <ion-item>
         <ion-label>Country</ion-label>
+
+        <!-- Field to select a country to check license plates for.-->
         <ion-select
           value="{{ getCountry() }}"
           (ionChange)="setCountry($event.target.value)"
