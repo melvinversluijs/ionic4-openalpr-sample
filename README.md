@@ -1,6 +1,6 @@
 # Ionic 4 OpenALPR sample.
 
-This sample project will be used to demonstrate the usage of the [Cordova OpenALPR plugin]: https://github.com/iMicknl/cordova-plugin-openalpr.
+This sample project will be used to demonstrate the usage of the [Cordova OpenALPR plugin](https://github.com/iMicknl/cordova-plugin-openalpr).
 
 ## Usage
 
