@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      OpenALPR Result
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- Show results. -->
+  <ion-list *ngIf="result.length > 0" lines="full">
+    <ion-list-header><ion-label>Results</ion-label></ion-list-header>
+    <ion-item>
+      <ion-note slot="start">Number</ion-note>
+      <ion-note slot="end">Confidence</ion-note>
+    </ion-item>
+    <ion-item *ngFor="let resultItem of result"
+      ><ion-label slot="start">{{ resultItem.number }}</ion-label>
+      <ion-label slot="end"
+        >{{ roundConfidence(resultItem.confidence) }}%</ion-label
+      ></ion-item
+    >
+  </ion-list>
+
+  <!-- If no results were found. -->
+  <ion-item *ngIf="result.length === 0">
+    <ion-label text-wrap>
+      No results were found. Please try again with a different image.
+    </ion-label>
+  </ion-item>
+
+  <!-- Show chosen country. -->
+  <ion-item lines="none">
+    <ion-label slot="start">Country</ion-label>
+    <ion-label slot="end">{{ getCountry() }}</ion-label>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <!-- Button to dismiss modal. -->
+    <ion-button expand="full" fill="solid" color="primary" (click)="dismiss()">
+      Dismiss
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,5 +1,7 @@
 {
   "name": "OpenALPR Sample",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
