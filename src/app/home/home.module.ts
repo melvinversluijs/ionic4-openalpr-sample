@@ -4,6 +4,8 @@ import { IonicModule } from "@ionic/angular";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
+import { Camera } from "@ionic-native/camera/ngx";
+
 import { HomePage } from "./home.page";
 import { ResultModalModule } from "../result/result.module";
 
@@ -20,6 +22,7 @@ import { ResultModalModule } from "../result/result.module";
       }
     ])
   ],
+  providers: [Camera],
   declarations: [HomePage]
 })
 export class HomePageModule {}
